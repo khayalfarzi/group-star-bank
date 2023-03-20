@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AccountStatementRequest {
-    private String accountNumber;
+public class CardStatementRequest {
+    private String CardNumber;
 
 }

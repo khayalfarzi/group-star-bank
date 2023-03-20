@@ -22,7 +22,7 @@ public class Transaction {
     @GeneratedValue
     private Long transactionId;
 
-    private String accountNumber;
+    private String cardNumber;
 
     private BigDecimal transactionAmount;
 

@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AccountStatement {
+public class CardStatement {
     BigDecimal currentBalance;
     List<Transaction> transactionHistory;
 }

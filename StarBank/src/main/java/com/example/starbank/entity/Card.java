@@ -16,14 +16,14 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "account")
-public class Account {
+@Table(name = "card")
+public class Card {
 
     @Id
     @GeneratedValue
-    private Long accountId;
+    private Long cardId;
 
-    String accountNumber;
+    String cardNumber;
 
     BigDecimal currentBalance;
 

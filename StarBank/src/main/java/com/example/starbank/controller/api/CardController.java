@@ -1,10 +1,10 @@
 package com.example.starbank.controller.api;
 
-import com.example.starbank.controller.request.AccountStatementRequest;
+import com.example.starbank.controller.request.CardStatementRequest;
 import com.example.starbank.controller.request.TransferBalanceRequest;
 import com.example.starbank.controller.response.Response;
-import com.example.starbank.entity.Account;
-import com.example.starbank.service.AccountService;
+import com.example.starbank.entity.Card;
+import com.example.starbank.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/account")
-public class AccountController {
+@RequestMapping("/api/card")
+public class CardController {
     @Autowired
-    private AccountService accountService;
+    private CardService cardService;
     @RequestMapping("/create")
-    public List<Account> create(@RequestBody Account account) {
-        accountService.save(account);
-        return accountService.findAll();
+    public List<Card> create(@RequestBody Card card) {
+        cardService.save(card);
+        return cardService.findAll();
     }
 
     @RequestMapping("/all")
-    public List<Account> all() {
-        return accountService.findAll();
+    public List<Card> all() {
+        return cardService.findAll();
     }
 
     @RequestMapping("/sendmoney")
@@ -34,18 +34,18 @@ public class AccountController {
     ) {
 
         return Response.ok().setPayload(
-                accountService.sendMoney(
+                cardService.sendMoney(
                         transferBalanceRequest
                 )
         );
     }
     @RequestMapping("/statement")
     public Response getStatement(
-            @RequestBody AccountStatementRequest accountStatementRequest
+            @RequestBody CardStatementRequest cardStatementRequest
 
     ){
         return Response.ok().setPayload(
-                accountService.getStatement(accountStatementRequest.getAccountNumber())
+                cardService.getStatement(cardStatementRequest.getCardNumber())
         );
 
     }

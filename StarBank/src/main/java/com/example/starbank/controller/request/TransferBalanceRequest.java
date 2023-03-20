@@ -12,9 +12,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TransferBalanceRequest {
-    private String fromAccountNumber;
+    private String fromCardNumber;
 
-    private String toAccountNumber;
+    private String toCardNumber;
 
     private BigDecimal amount;
 
