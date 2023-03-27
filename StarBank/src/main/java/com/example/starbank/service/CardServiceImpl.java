@@ -24,7 +24,7 @@ public class CardServiceImpl implements CardService {
 
     public Card save(Card card) {
         cardRepository.save(card);
-        return cardRepository.findByCardNumber(card.getCardNumber());
+        return cardRepository.findByCardNumber(card.getCard_No());
     }
 
     public List<Card> findAll() {
@@ -48,12 +48,12 @@ public class CardServiceImpl implements CardService {
                 fromCardNumber
         );
         Card toCard = cardRepository.findByCardNumber(toCardNumber);
-        if (fromCard.getCurrentBalance().compareTo(BigDecimal.ONE) == 1
-                && fromCard.getCurrentBalance().compareTo(amount) == 1
+        if (fromCard.getBalance().compareTo(BigDecimal.ONE)  == 1
+                && fromCard.getBalance().compareTo(amount) == 1
         ) {
-            fromCard.setCurrentBalance(fromCard.getCurrentBalance().subtract(amount));
+            fromCard.setBalance(fromCard.getBalance().subtract(amount));
             cardRepository.save(fromCard);
-            toCard.setCurrentBalance(toCard.getCurrentBalance().add(amount));
+            toCard.setBalance(toCard.getBalance().add(amount));
             cardRepository.save(toCard);
             Transaction transaction = transactionRepository.save(new Transaction(0L, fromCardNumber, amount, new Timestamp(System.currentTimeMillis())));
             return transaction;
@@ -64,6 +64,6 @@ public class CardServiceImpl implements CardService {
     @Override
     public CardStatement getStatement(String cardNumber) {
         Card card = cardRepository.findByCardNumber(cardNumber);
-        return new CardStatement(card.getCurrentBalance(), transactionRepository.findByCardNumber(cardNumber));
+        return new CardStatement(card.getBalance(), transactionRepository.findByCardNumber(cardNumber));
     }
 }

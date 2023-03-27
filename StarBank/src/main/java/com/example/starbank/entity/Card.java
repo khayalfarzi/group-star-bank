@@ -10,21 +10,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
 @Table(name = "card")
 public class Card {
 
-    @Id
-    @GeneratedValue
-    private Long cardId;
+    private  long id;
+    private  String card_No;
+    private  BigDecimal balance;
 
-    String cardNumber;
+    private  int cvv;
+    private  Date expireData;
+    private  int pin;
+    private  LocalDateTime createdAt;
+    private  LocalDateTime updatedAt;
 
-    BigDecimal currentBalance;
 
 }
