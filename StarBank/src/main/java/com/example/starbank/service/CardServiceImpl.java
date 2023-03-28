@@ -1,5 +1,6 @@
 package com.example.starbank.service;
 
+import com.example.starbank.client.CardClient;
 import com.example.starbank.controller.request.TransferBalanceRequest;
 import com.example.starbank.dto.CardStatement;
 import com.example.starbank.entity.Card;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +24,7 @@ public class CardServiceImpl implements CardService {
     @Autowired
     TransactionRepository transactionRepository;
 
+    private CardClient client;
     public Card save(Card card) {
         cardRepository.save(card);
         return cardRepository.findByCardNumber(card.getCard_No());
@@ -31,11 +34,20 @@ public class CardServiceImpl implements CardService {
         return cardRepository.findAll();
     }
 
-    public Card findByAccountNumber(String cardNumber) {
+    public Card findByCardNumber(String cardNumber) {
         Card card = cardRepository.findByCardNumber(cardNumber);
         return card;
     }
+    private List<Card> getCardFromCbar() {
+        var cardList = client.getCards();
 
+        var cards = new ArrayList<Card>();
+
+        cards.addAll(cardList.getCardInfo());
+
+
+        return cards;
+    }
 
     @Override
     public Transaction sendMoney(
